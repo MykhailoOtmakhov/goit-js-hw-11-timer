@@ -2,7 +2,7 @@ class CountdownTimer{
     constructor ({selector,targetDate}) {
       this.selector = selector;    
       this.targetDate = targetDate;
-      this.currentTime = Date.now();
+      // this.currentTime = Date.now();
 
       this.refs = {
         days: document.querySelector(`${selector} [data-value="days"]`),
@@ -10,7 +10,7 @@ class CountdownTimer{
         mins: document.querySelector(`${selector} [data-value="mins"]`),
         secs: document.querySelector(`${selector} [data-value="secs"]`),
         timerFace: document.querySelector('#timer-1'),
-      };
+      }
     }  
   
     renderCountdownTimer(){
@@ -19,22 +19,22 @@ class CountdownTimer{
         const deltaTime = this.targetDate - Date.now();
         this.updateTimerFace(getTimeComponents(deltaTime));      
       },1000);
-    };
+    }
   
   
     updateTimerFace({days, hours, mins, secs}){
-      this.refs.days.innerHTML = days,
-      this.refs.hours.innerHTML = hours,
-      this.refs.mins.innerHTML = mins,
-      this.refs.secs.innerHTML = secs,  
-    };
+      this.refs.days.innerHTML = days;
+      this.refs.hours.innerHTML = hours;
+      this.refs.mins.innerHTML = mins;
+      this.refs.secs.innerHTML = secs; 
+    }
 }
     
     const timer = new CountdownTimer({
       selector: '#timer-1',
       targetDate: new Date('Nov 23,2020'),
      }
-    );
+    )
   
   
   console.log(timer);
