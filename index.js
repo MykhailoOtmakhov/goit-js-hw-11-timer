@@ -9,7 +9,7 @@ class CountdownTimer{
         hours: document.querySelector(`${selector} [data-value="hours"]`),
         mins: document.querySelector(`${selector} [data-value="mins"]`),
         secs: document.querySelector(`${selector} [data-value="secs"]`),
-        timerFace: document.querySelector('#timer-1'),
+        timerFace: document.querySelector('#timer-1'),        
       }
     }  
   
@@ -19,9 +19,20 @@ class CountdownTimer{
         const deltaTime = this.targetDate - Date.now();
         this.updateTimerFace(getTimeComponents(deltaTime));      
       },1000);
+
+      function getTimeComponents(time){
+        const days = pad(Math.floor(time / (1000 * 60 * 60 * 24)));
+        const hours =pad(Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+        const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
+        const secs = pad(Math.floor((time % (1000 * 60)) / 1000));
+        return {days, hours, mins, secs};
+      }
+
+      function pad(value){
+        return String(value).padStart(2,'0');
+      }
     }
-  
-  
+    
     updateTimerFace({days, hours, mins, secs}){
       this.refs.days.innerHTML = days;
       this.refs.hours.innerHTML = hours;
@@ -30,26 +41,17 @@ class CountdownTimer{
     }
 }
     
-    const timer = new CountdownTimer({
+const timer = new CountdownTimer({
       selector: '#timer-1',
       targetDate: new Date('Nov 23,2020'),
-     }
-    )
-  
-  
-  console.log(timer);
-  
-  timer.renderCountdownTimer();
-  
-  function pad(value){
-    return String(value).padStart(2,'0');
+
   }
+)
   
-  function getTimeComponents(time){
-    const days = pad(Math.floor(time / (1000 * 60 * 60 * 24)));
-    const hours =pad(Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-    const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
-    const secs = pad(Math.floor((time % (1000 * 60)) / 1000));
-    return {days, hours, mins, secs};
-  }
+  
+console.log(timer);
+  
+timer.renderCountdownTimer();
+  
+  
   
